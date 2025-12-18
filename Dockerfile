@@ -26,6 +26,6 @@ RUN miktex packages upgrade complete
 RUN curl -L -o moderncv_v2.4.1.tar.gz https://github.com/moderncv/moderncv/archive/refs/tags/v2.4.1.tar.gz
 RUN mkdir moderncv_v2.4.1 | tar -xvzf moderncv_v2.4.1.tar.gz -C moderncv_v2.4.1 --strip-components=1
 
-COPY moderncv_update/moderncvheadvii.sty /home/moderncv_v2.4.1/
+# COPY moderncv_update/moderncvheadvii.sty /home/moderncv_v2.4.1/
 WORKDIR /home/moderncv_v2.4.1
 # RUN miktex packages install moderncv  # already intalled
