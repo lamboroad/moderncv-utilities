@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# output_directory
 # inspired from: https://mywiki.wooledge.org/BashFAQ/035
 # Usage info
 show_help() {
@@ -85,10 +85,9 @@ if [[ -n $1 ]]; then
   # tex_file="$(basename -- $tex_filepath)"
   for tfile in "$input_directory/$tex_filename_pattern"*.tex; do
     echo "- file : $tfile"
-    echo "sudo ./generate_pdf.sh  $tfile -t $output_format -o $output_directory"
-    sudo ./generate_pdf.sh -t $output_format -o $output_directory -- $tfile
+    echo "miktex-pdflatex $tfile -quiet -output-directory=\"$output_directory\" -include-directory=\"$input_directory\" -output-format=\"$output_format\""
+    miktex-pdflatex $tfile -quiet -output-directory="$output_directory" -include-directory="$input_directory" -output-format="$output_format"
   done
 else
   die 'ERROR: "TEX_FILENAME_PATTERN" is required.'
 fi
-
