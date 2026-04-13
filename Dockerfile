@@ -49,10 +49,13 @@ RUN git clone https://github.com/liantze/AltaCV.git ${TEXMF_ROOT_PATH}/altacv
 # MODERNCV latex class
 RUN curl -L -o moderncv_v2.4.1.tar.gz https://github.com/moderncv/moderncv/archive/refs/tags/v2.4.1.tar.gz
 RUN mkdir -p ${TEXMF_ROOT_PATH}/moderncv && tar -xvzf moderncv_v2.4.1.tar.gz -C ${TEXMF_ROOT_PATH}/moderncv --strip-components=1
+#
+# 1. Tell MiKTeX /usr/local/share/texmf is a valid root
+RUN initexmf --admin --register-root=/usr/local/share/miktex-texmf
+# 2. Update the "File Name Database" (FNDB) so it indexes the new files
+RUN initexmf --admin --update-fndb
 
 WORKDIR ${WORKDIR_PATH}
 
 # CMD ["bash"]
-# ENTRYPOINT ${WORKDIR_PATH}/generate_cvs.sh
-# CMD ["./generate_cvs.sh"]
 ENTRYPOINT ["/miktex/work/generate_cvs.sh"]
